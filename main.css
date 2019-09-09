@@ -1,0 +1,24 @@
+@font-face {
+  font-family: 'monumentValley';
+  src: url('MonumentValley12-X55o.otf');
+  font-weight:normal;
+  font-style:normal;
+}
+
+body {
+ background-color: #88D498 !important;
+}
+
+h1{
+  font-family:'monumentValley';
+  color:#FFFFFF;
+  padding:10px;
+  font-size:150px;
+}
+
+.cont1 {
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:60;
+  max-width: 300px;
+}
