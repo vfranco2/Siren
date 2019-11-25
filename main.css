@@ -4,21 +4,31 @@
   font-weight:normal;
   font-style:normal;
 }
-
 body {
  background-color: #88D498 !important;
 }
-
-h1{
+h2{
   font-family:'monumentValley';
   color:#FFFFFF;
   padding:10px;
   font-size:150px;
 }
-
+h3{
+  font-family:'monumentValley';
+  color:#FFFFFF;
+  padding:10px;
+  font-size:80px;
+}
+h4{
+font-family:'monumentValley';
+color:#FFFFFF;
+padding:10px;
+font-size:30px;
+}
 .cont1 {
   margin-left:auto;
   margin-right:auto;
   margin-top:60;
   max-width: 300px;
 }
+
