@@ -1,4 +1,6 @@
 # Siren
-Rewrite songs the way they were meant to be written.
+Your favorite songs, improved
 
-http://35.223.204.0/
+Paste the URL of a song lyric page from https://genius.com into the search bar to use. 
+
+http://vfranco.me
