@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+   
     <link href="main.css" rel="stylesheet" type="text/css">
 
     <title>Siren</title>
@@ -28,8 +28,10 @@
 		<div class="row text-center justify-content-center">
 			<div class="col">
                			<h2>Siren</h2>
+				<h4>Copy a song link from genius.com and paste it in the box below.</h4>
 				<form method="post" action="">
-                			<input class="form-control" type="text" placeholder="Paste a Genius Lyric URL here" aria-label="Search" name="searchlyr"/>
+                			<input class="form-control white-border" type="text" placeholder="Search" aria-label="Search" name="searchlyr"/>
+					
 				</form>
 			</div>
 		</div>
@@ -38,6 +40,7 @@
 		<div class="row text-center">
 			<div class="col">
 				<h4>Original</h4>
+				<div style="color:#FFFFFF">
 				<?php
                                         if( isset($_POST['searchlyr']) ) {
                                                 $url = $_POST['searchlyr'];
@@ -45,9 +48,11 @@
 						echo $orig;
                                         }
                                 ?>
+				</div>
 			</div>
 			<div class="col">
                                 <h4>Improved</h4>
+				<div style="color:#FFFFFF">
 				<?php
                                         if( isset($_POST['searchlyr']) ) {
                                                 $url = $_POST['searchlyr'];
@@ -55,9 +60,11 @@
 						echo $impr;
                                         }
                                 ?>
+				</div>
                         </div>
 		</div>
 	    </div>
       </div>
   </body>
 </html>
+
