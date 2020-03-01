@@ -1,70 +1,90 @@
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-   
-    <link href="main.css" rel="stylesheet" type="text/css">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+      <link href="resources/main.css" rel="stylesheet" type="text/css">
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <title>Siren</title>
+   </head>
+   <body>
+      <?php include("resources/head.html") ?>
+      <br><br>
+      <div class="container">
+         <div class="row text-center justify-content-center">
+            <div class="col">
+               <h2>Siren</h2>
+               <h4>Search an artist or song.</h4>
+               <form autocomplete="off" method="post" action="">
+                   <input id="genlink" class="form-control black-border" type="text" placeholder="Search" aria-label="Search" name="searchlyr"/>
+                   <div class="mypanel"></div>
+               </form>
 
-    <title>Siren</title>
-  </head>
-  <body>
+               <script>
+               $(function () {
+                 var getData = function (request, response) {
+                   var url = 'https://api.genius.com/search?access_token=84WMdKzbMh7QnirAdTu5nj8iw0zkQ9vKVcAJHJdZ_miCxwgaplV_oogM-rlKRpXN&q=' + request.term;
+                     $.getJSON(url,function (data) {
+                             var data = [`${data.response.hits[0].result.full_title} | ${data.response.hits[0].result.url}`,
+                                         `${data.response.hits[1].result.full_title} | ${data.response.hits[1].result.url}`,
+                                         `${data.response.hits[2].result.full_title} | ${data.response.hits[2].result.url}`,
+                                         `${data.response.hits[3].result.full_title} | ${data.response.hits[3].result.url}`,
+                                         `${data.response.hits[4].result.full_title} | ${data.response.hits[4].result.url}`]
+                             response(data);
+                         });
+                 };
 
-    <nav class="navbar navbar-light bg-light fixed-top navbar-expand-sm">
-            <!-- <div class="container-fluid"> -->
-            <a class="navbar-brand" href="#">Siren</a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><a class="nav-link" href="http://35.226.240.223/index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="http://35.226.240.223/about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://github.com/vfranco2/Siren">The Werk</a></li>
-                </ul>
+                 var selectItem = function (event, ui) {
+                     $("#genlink").val(ui.item.value);
+                     return false;
+                 }
+
+                 $("#genlink").autocomplete({
+                     source: getData,
+                     select: selectItem,
+                     minLength: 4,
+                     change: function() {
+                         $("#genlink").val("").css("display", 2);
+                     }
+                 });
+              });
+              </script>
+
             </div>
-        </nav>
-
-        <div class="container">
-            <div class="cont1">
-		<div class="row text-center justify-content-center">
-			<div class="col">
-               			<h2>Siren</h2>
-				<h4>Copy a song link from genius.com and paste it in the box below.</h4>
-				<form method="post" action="">
-                			<input class="form-control white-border" type="text" placeholder="Search" aria-label="Search" name="searchlyr"/>
-					
-				</form>
-			</div>
-		</div>
+         </div>
+         <div class="container">
+            <div class="row text-center">
+               <div class="col">
+                  <h4>Original</h4>
+                  <div style="color:#000000">
+                     <?php
+                        if( isset($_POST['searchlyr']) ) {
+                          $url = $_POST['searchlyr'];
+                          $send = trim(substr($url, strpos($url, '|') + 1));
+                          $scraped = substr(shell_exec("python3 py/scr.py " . $send . " 2>&1"),2,-2);
+                          echo str_replace('@', "'", $scraped);
+                        }
+                        ?>
+                  </div>
+               </div>
+               <div class="col">
+                  <h4>Improved</h4>
+                  <div style="color:#000000">
+                     <?php
+                        if( isset($_POST['searchlyr']) ) {
+                          $url = $_POST['searchlyr'];
+                          $send = trim(substr($url, strpos($url, '|') + 1));
+                          $impr = substr(shell_exec("python3 py/lyr.py " . $send . " 2>&1"),2,-2);
+                          echo str_replace('@', "'", $impr);
+                        }
+                        ?>
+                  </div>
+               </div>
             </div>
-	    <div class="container">
-		<div class="row text-center">
-			<div class="col">
-				<h4>Original</h4>
-				<div style="color:#FFFFFF">
-				<?php
-                                        if( isset($_POST['searchlyr']) ) {
-                                                $url = $_POST['searchlyr'];
-						$orig = substr(shell_exec("python3 scr.py " . $url . " 2>&1"),2,-2);
-						echo $orig;
-                                        }
-                                ?>
-				</div>
-			</div>
-			<div class="col">
-                                <h4>Improved</h4>
-				<div style="color:#FFFFFF">
-				<?php
-                                        if( isset($_POST['searchlyr']) ) {
-                                                $url = $_POST['searchlyr'];
-                                                $impr = substr(shell_exec("python3 lyr.py " . $url . " 2>&1"),2,-2);
-						echo $impr;
-                                        }
-                                ?>
-				</div>
-                        </div>
-		</div>
-	    </div>
+         </div>
       </div>
-  </body>
+   </body>
 </html>
-

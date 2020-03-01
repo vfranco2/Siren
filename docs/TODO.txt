@@ -1,3 +1,0 @@
-1) reimplement database storage of translated lyrics
-2) add db query upon translation request to check for existing songs within db
-3) reimplement use of genius api for artist/title/song id tracking within db

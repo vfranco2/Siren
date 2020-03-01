@@ -4,25 +4,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
- 
-    <link href="main.css" rel="stylesheet" type="text/css">
-
+    <link href="resources/main.css" rel="stylesheet" type="text/css">
     <title>About</title>
   </head>
   <body>
-
-    <nav class="navbar navbar-light bg-light fixed-top navbar-expand-sm">
-            <!-- <div class="container-fluid"> -->
-            <a class="navbar-brand" href="#">Siren</a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="http://35.226.240.223/index.php">Home</a></li>
-                    <li class="nav-item active"><a class="nav-link" href="http://35.226.240.223/about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://github.com/vfranco2/Siren">The Werk</a></li>
-                </ul>
-            </div>
-        </nav>
-
+	<?php include("resources/head.html") ?>
         <div class="h-33">
         <div class="container">
             <div class="cont1">
@@ -38,7 +24,7 @@
         <div class="cont1">
 <br><br><br>
 	  <p>Named after the mythological creature, Siren takes wonderful music and delivers awful results. Searching your favorite songs in Siren will intentionally mangle its lyrics, hopefully with hilarious results.
-	  <p>This project was built by Vlad Franco for CSI 3660 - it makes use of a webscraper built in Python using BeautifulSoup, the Genius API, the Google Translate API, and a MySQL server. All of the implemented tools are managed by a PHP layer handling calls and returns.</p>
+	  <p>Built using Python, Beautiful Soup, Google Cloud API, Google Translate API, Genius API, and JQuery.</p>
         </div>
       </div>
   </body>
