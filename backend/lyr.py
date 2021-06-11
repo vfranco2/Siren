@@ -34,7 +34,11 @@ def lyricTranslator(song):
     if cursor.rowcount == 0:
         response = requests.get(urlt)
         soup = BeautifulSoup(response.text, 'html.parser')
-        scrapedLyric = soup.find(class_='lyrics').get_text()
+        scrapedLyric = soup.find(class_='kkHBOZ')
+        scrapedLyric = str(scrapedLyric)
+        scrapedLyric = scrapedLyric.replace('<br/>', '\n')
+        soup = BeautifulSoup(scrapedLyric, 'html.parser')
+        scrapedLyric = soup.find(class_='kkHBOZ').get_text()
         languages = ['es', 'ja', 'lt', 'ml', 'zh-TW', 'en']
         count = 0
         def translate_recur(lyricText, counter):
@@ -49,7 +53,9 @@ def lyricTranslator(song):
         translatedLyrics = translate_recur(scrapedLyric, count)
         translatedLyrics = translatedLyrics.replace('\n', '<br>')
         translatedLyrics = translatedLyrics.replace("'", '@')
-        translatedLyrics = translatedLyrics[8:]
+        translatedLyrics = translatedLyrics.replace("【", '[')
+        translatedLyrics = translatedLyrics.replace("】", ']')
+        print(translatedLyrics)
         cursor.execute("insert into lyrics(songurl, songlyrics) values ('%s','%s')" % (urlt, translatedLyrics))
         mydb.commit()
         cursor.close()
